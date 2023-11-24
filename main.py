@@ -4,10 +4,10 @@ import os
 from edt import EDT
 import menu as mn
 from log import Log
+from facview import DDLEDT, DDLRestaurants
 
 
 DISCORD_TOKEN = os.environ.get("FACBOT_TOKEN")
-print(DISCORD_TOKEN)
 
 log = Log(filename="log.log")
 
@@ -22,9 +22,9 @@ async def edt(int: discord.Interaction, promo: str, grp_td: str, grp_tp: str):
     await int.response.send_message(file=discord.File('images/emploi_du_temps.png'), ephemeral=True)
 
 @tree.command(name = "menu", description = "Get specific RU menu")
-async def menu(int: discord.Interaction, ru: str):
-    menu = mn.screenshot(ru)
-    await int.response.send_message(menu, ephemeral=True)
+async def menu(int: discord.Interaction):
+    restaurants = DDLRestaurants(log=log)
+    await int.response.send_message(view=restaurants, ephemeral=True)
 
 
 

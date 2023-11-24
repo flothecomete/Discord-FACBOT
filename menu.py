@@ -17,7 +17,7 @@ def screenshot(l_id_restaurant):
         site = rq.urlopen("http://ru.florian.vanbraekel.fr/menu.html")
         html = site.read()
         soup = BeautifulSoup(html, 'html.parser')
-        son_div = soup.find("div", {"id" : l_id_restaurant})
+        son_div = soup.find("div", {"id" : l_id_restaurant[:-2]})
         repas = son_div.find("ul", {"class" : "meal_foodies"})
         n=0
         for les_parties in repas:
